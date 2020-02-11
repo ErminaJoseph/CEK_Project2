@@ -27,6 +27,8 @@ $(document).ready(function() {
     $("#user_search").on("click", function(event) {
         event.preventDefault();
         var main_Ingredient = $("#main_ingredient").val().trim();
+        var exceptions = $("#exceptions").val().trim().split(", ")
+            // var exceptionsArray=
         var dietType = $("#diet_type").val();
         var health1 = $("#health_type1").val();
         var health2 = $("#health_type2").val();
@@ -55,6 +57,11 @@ $(document).ready(function() {
         }
         if ($("#health_type6").prop('checked')) {
             query += "&health=" + health6;
+        }
+        if (exceptions.length > 0) {
+            for (var i = 0; i < exceptions.length; i++) {
+                query += "&excluded=" + exceptions[i];
+            }
         }
 
         console.log(query);
