@@ -20,8 +20,8 @@ app.use(express.json());
 
 // Static directory
 app.use(express.static("public"));
-app.use(express.static(__dirname + "/public/css"));
-app.use(express.static(__dirname + "/public/javascript"));
+app.use(express.static(__dirname + "/public/assets/css"));
+app.use(express.static(__dirname + "/public/assets/javascript"));
 console.log(__dirname, "../public/form.html");
 
 // Routes
