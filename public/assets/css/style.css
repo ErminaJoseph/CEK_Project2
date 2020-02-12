@@ -1,0 +1,19 @@
+body {
+    background-color: #fffbd0;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    width: 500px;
+}
+
+h3 {
+    font-family: 'Acme', sans-serif;
+    color: #cc6600
+}
+
+#add-user {
+    text-align: left;
+    font-size: small;
+}
