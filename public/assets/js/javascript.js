@@ -28,7 +28,7 @@ $(document).ready(function() {
         event.preventDefault();
         var main_Ingredient = $("#main_ingredient").val().trim();
         var exceptions = $("#exceptions").val().trim().split(", ")
-            // var exceptionsArray=
+        console.log(exceptions.length);
         var dietType = $("#diet_type").val();
         var health1 = $("#health_type1").val();
         var health2 = $("#health_type2").val();
@@ -58,19 +58,34 @@ $(document).ready(function() {
         if ($("#health_type6").prop('checked')) {
             query += "&health=" + health6;
         }
-        if (exceptions.length > 0) {
+        if (exceptions.length > 1) {
             for (var i = 0; i < exceptions.length; i++) {
                 query += "&excluded=" + exceptions[i];
             }
         }
-
-        console.log(query);
 
 
 
         $.get(query).
         then(function(response) {
             console.log(response);
+            // console.log(response.hits[0].recipe.dietLabels[1]);
+            var title = $("<h3>");
+            var image = $("<img>");
+            var url = $("<p>");
+            var diet = $("<p>");
+            for (var i = 0; i < response.hits.length; i++) {
+                title.text(response.hits[i].recipe.label);
+                url.text("Link to the recipe" + response.hits[i].recipe.url)
+                image.attr("src", response.hits[i].recipe.image);
+                if (response.hits[i].recipe.dietLabels[i] !== undefined) {
+                    console.log(response.hits[i].recipe);
+                }
+            }
+
+
+
+
         })
     });
 });
