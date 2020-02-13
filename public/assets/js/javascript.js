@@ -69,6 +69,9 @@ $(document).ready(function() {
             console.log(response);
             var button = $("<button>");
             var buttonDiv = $("<div>");
+            var total = 0
+            var totalDiv = $("<div>");
+            totalDiv.addClass("totalDiv")
             buttonDiv.addClass("buttonDiv");
             button.attr("id", "reset");
             button.addClass("btn btn-primary");
@@ -85,6 +88,27 @@ $(document).ready(function() {
                 var url = $("<a>");
                 var miniDiv = $("<div>");
                 var listDiv = $("<div>");
+                var cost = $("<p>");
+
+                if (response.hits[i].recipe.ingredientLines.length < 5) {
+                    total += 20;
+                    cost.text("Cost of this recipe 20 dollars");
+                    miniDiv.append(cost);
+                }
+                if (response.hits[i].recipe.ingredientLines.length > 5 && response.hits[i].recipe.ingredientLines.length < 10) {
+                    total += 40;
+                    cost.text("Cost of this recipe 40 dollars");
+                    miniDiv.append(cost);
+                }
+                if (response.hits[i].recipe.ingredientLines.length > 10) {
+                    total += 60;
+                    cost.text("Cost of this recipe 60 dollars");
+                    miniDiv.append(cost);
+                }
+                // if (i = response.hits.length) {
+                //     console.log("test");
+                // }
+
                 listDiv.attr("id", "listDiv");
                 miniDiv.attr("id", "miniDiv");
 
@@ -99,6 +123,7 @@ $(document).ready(function() {
                 miniDiv.append(url);
                 listDiv.append(healthList, ingredientList);
                 recipe.addClass("recipe");
+                recipe.attr("id", i);
                 image.attr("src", response.hits[i].recipe.image);
                 recipe.prepend(title, image, miniDiv, listDiv);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
@@ -125,7 +150,9 @@ $(document).ready(function() {
                 }
                 $(".storage").append(recipe);
             }
-            $(".storage").append(buttonDiv);
+            console.log(total)
+            totalDiv.text("Your total is " + total) + " dollars";
+            $(".storage").append(totalDiv, buttonDiv);
 
 
         })
@@ -134,6 +161,6 @@ $(document).ready(function() {
         event.preventDefault();
         location.reload();
         $(this).remove();
-        console.log("test");
+
     });
 });

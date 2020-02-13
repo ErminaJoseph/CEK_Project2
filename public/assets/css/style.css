@@ -37,7 +37,8 @@ a {
 .recipe {
     width: 100%;
     margin-bottom: 30px;
-    height: 100%;
+    height: 750px;
+    border-bottom: 2px black solid;
 }
 
 h3 {
@@ -55,6 +56,12 @@ h4 {
 
 .form-check-input {
     margin-left: 5px;
+}
+
+.totalDiv {
+    width: 40%;
+    border: 2px solid black;
+    margin: 10px auto;
 }
 
 #add-user {
