@@ -28,11 +28,6 @@ $(document).ready(function() {
         event.preventDefault();
         var main_Ingredient = $("#main_ingredient").val().trim();
         var exceptions = $("#exceptions").val().trim().split(", ")
-
-
-
-        console.log(exceptions.length);
-
         var dietType = $("#diet_type").val();
         var health1 = $("#health_type1").val();
         var health2 = $("#health_type2").val();
@@ -40,7 +35,7 @@ $(document).ready(function() {
         var health4 = $("#health_type4").val();
         var health5 = $("#health_type5").val();
         var health6 = $("#health_type6").val();
-        var query = "https://api.edamam.com/search?q=" + main_Ingredient + "&app_id=cae2ccda&app_key=d907c995bb581b76c6e4492ff1c9bb4e&to=2";
+        var query = "https://api.edamam.com/search?q=" + main_Ingredient + "&app_id=cae2ccda&app_key=d907c995bb581b76c6e4492ff1c9bb4e&to=5";
         if (dietType !== null) {
             query += "&diet=" + dietType.trim();
         }
@@ -83,24 +78,48 @@ $(document).ready(function() {
             button.attr("id", "reset");
             button.addClass("btn btn-primary");
             button.text("Search Again");
-            // console.log(response.hits[0].recipe.dietLabels[1]);
 
+            // console.log(response.hits[0].recipe.ingredientLines[5]);
             for (var i = 0; i < response.hits.length; i++) {
+                var healthList = $("<ol>");
+                var ingredientList = $("<ol>");
                 var recipe = $("<div>");
                 var title = $("<h3>");
                 var image = $("<img>");
-                var url = $("<p>");
-
-
+                var url = $("<a>");
+                ingredientList.text("The Ingredients")
+                healthList.text("Health Benefits:");
                 title.text(response.hits[i].recipe.label);
-                url.text("Link to the recipe" + response.hits[i].recipe.url)
+                url.text("Link to the Recipe");
+                url.attr({
+                    href: response.hits[i].recipe.url,
+                    target: "_blank"
+                });
                 image.attr("src", response.hits[i].recipe.image);
-                recipe.append(title, image, url);
+                recipe.append(title, image);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
-                    var diet = $("<p>");
-                    recipe.append(diet);
+
+                    for (var k = 0; k < response.hits[i].recipe.dietLabels.length; k++) {
+
+                        var diet = $("<p>");
+                        diet.text("Diet type: " + response.hits[i].recipe.dietLabels[k]);
+                        recipe.append(diet);
+                    }
+                }
+                for (var j = 0; j < response.hits[i].recipe.healthLabels.length; j++) {
+                    var health = $("<li>");
+                    health.text(response.hits[i].recipe.healthLabels[j]);
+                    healthList.append(health);
 
                 }
+                for (var n = 0; n < response.hits[i].recipe.ingredientLines.length; n++) {
+                    var count = n + 1;
+                    var ingredient = $("<li>");
+                    ingredient.text(count + ": " + response.hits[i].recipe.ingredientLines[n]);
+                    ingredientList.append(ingredient);
+                    console.log("test");
+                }
+                recipe.append(ingredientList, healthList, url);
                 $(".storage").append(recipe);
             }
             $(".storage").append(button);
@@ -108,7 +127,7 @@ $(document).ready(function() {
         })
     });
     $(".storage").on("click", "#reset", function(event) {
-        console.log("click test");
+
         event.preventDefault();
         location.reload();
     });
