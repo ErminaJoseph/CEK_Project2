@@ -18,7 +18,11 @@ $("#login-submit").on("click", function(event) {
     event.preventDefault();
 
     var loginCredentials = {
-        email: $("#inputUsername").val().trim(),
+
+        email: $("#inputEmail").val().trim(),
+
+       
+
         password: $("#inputPassword").val().trim()
     };
 
@@ -57,15 +61,18 @@ $("#submit-new-user").on("click", function(event) {
     event.preventDefault();
 
     var newUser = {
-        newEmail: $("#inputEmailnameNew").val().trim(),
-        newPassword: $("#inputPasswordNew").val().trim()
-        // firstName: $("#inputFirstName").val().trim(),
-        // lastName: $("#inputLastName").val().trim(),
-        // address: $("#inputAddress").val().trim(),
-        // addressTwo: $("#inputAddress2").val().trim(),
-        // city: $("#inputCity").val().trim(),
-        // state: $("#inputState").val().trim(),
-        // zipCode: $("#inputZip").val().trim()
+
+        newEmail: $("#inputEmailNew").val().trim(),
+        newPassword: $("#inputPasswordNew").val().trim(),
+        firstName: $("#inputFirstName").val().trim(),
+        lastName: $("#inputLastName").val().trim(),
+        address: $("#inputAddress").val().trim(),
+        addressTwo: $("#inputAddress2").val().trim(),
+        city: $("#inputCity").val().trim(),
+        state: $("#inputState").val().trim(),
+        zipCode: $("#inputZip").val().trim()
+
+    
 
         if (!userData.email || !userData.password) {
             return;
@@ -95,19 +102,27 @@ $("#submit-new-user").on("click", function(event) {
           $("#alert").fadeIn(500);
         }
       });
+
     };
 
     console.log(newUser);
 
     $("#add-success").show();
 
-    $("#inputnameNew").empty();
-    $("#inputPasswordNew").empty();
-    // $("#inputFirstName").empty();
-    // $("#inputLastName").empty();
-    // $("#inputAddress").empty();
-    // $("#inputAddress2").empty();
-    // $("#inputCity").empty();
-    // $("#inputState").val("");
-    // $("#inputZip").empty();
+
+    $("#inputEmailNew").val("");
+    $("#inputPasswordNew").val("");
+    $("#inputFirstName").val("");
+    $("#inputLastName").val("");
+    $("#inputAddress").val("");
+    $("#inputAddress2").val("");
+    $("#inputCity").val("");
+    $("#inputState").val("");
+    $("#inputZip").val("");
+});
+
+$(".navbar-toggler").on("click", function (e) {
+    
+
+
 });

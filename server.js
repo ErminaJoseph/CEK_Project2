@@ -23,6 +23,10 @@ app.use(express.static("public"));
 app.use(express.static(__dirname + "/public/assets/css"));
 app.use(express.static(__dirname + "/public/assets/js"));
 
+app.use(express.static(__dirname + "/public/assets/img"));
+
+
+
 
 // Routes
 // =============================================================
