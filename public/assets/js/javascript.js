@@ -29,8 +29,8 @@ $(document).ready(function() {
         var main_Ingredient = $("#main_ingredient").val().trim();
         var exceptions = $("#exceptions").val().trim().split(", ")
 
-           
-=======
+
+
         console.log(exceptions.length);
 
         var dietType = $("#diet_type").val();
@@ -40,7 +40,7 @@ $(document).ready(function() {
         var health4 = $("#health_type4").val();
         var health5 = $("#health_type5").val();
         var health6 = $("#health_type6").val();
-        var query = "https://api.edamam.com/search?q=" + main_Ingredient + "&app_id=cae2ccda&app_key=d907c995bb581b76c6e4492ff1c9bb4e&to=10";
+        var query = "https://api.edamam.com/search?q=" + main_Ingredient + "&app_id=cae2ccda&app_key=d907c995bb581b76c6e4492ff1c9bb4e&to=2";
         if (dietType !== null) {
             query += "&diet=" + dietType.trim();
         }
@@ -63,8 +63,8 @@ $(document).ready(function() {
             query += "&health=" + health6;
         }
 
-   
-=======
+
+
         if (exceptions.length > 1) {
 
             for (var i = 0; i < exceptions.length; i++) {
@@ -77,25 +77,39 @@ $(document).ready(function() {
 
         $.get(query).
         then(function(response) {
+            $(".storage").empty();
             console.log(response);
-
+            var button = $("<button>");
+            button.attr("id", "reset");
+            button.addClass("btn btn-primary");
+            button.text("Search Again");
             // console.log(response.hits[0].recipe.dietLabels[1]);
-            var title = $("<h3>");
-            var image = $("<img>");
-            var url = $("<p>");
-            var diet = $("<p>");
+
             for (var i = 0; i < response.hits.length; i++) {
+                var recipe = $("<div>");
+                var title = $("<h3>");
+                var image = $("<img>");
+                var url = $("<p>");
+
+
                 title.text(response.hits[i].recipe.label);
                 url.text("Link to the recipe" + response.hits[i].recipe.url)
                 image.attr("src", response.hits[i].recipe.image);
+                recipe.append(title, image, url);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
-                    console.log(response.hits[i].recipe);
+                    var diet = $("<p>");
+                    recipe.append(diet);
+
                 }
+                $(".storage").append(recipe);
             }
-
-
-
+            $(".storage").append(button);
 
         })
+    });
+    $(".storage").on("click", "#reset", function(event) {
+        console.log("click test");
+        event.preventDefault();
+        location.reload();
     });
 });
