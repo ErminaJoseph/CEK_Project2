@@ -18,7 +18,7 @@ $("#login-submit").on("click", function(event) {
     event.preventDefault();
 
     var loginCredentials = {
-        username: $("#inputUsername").val().trim(),
+        email: $("#inputEmail").val().trim(),
         password: $("#inputPassword").val().trim()
     };
 
@@ -30,7 +30,7 @@ $("#submit-new-user").on("click", function(event) {
     event.preventDefault();
 
     var newUser = {
-        newUsername: $("#inputUsernameNew").val().trim(),
+        newEmail: $("#inputEmailNew").val().trim(),
         newPassword: $("#inputPasswordNew").val().trim(),
         firstName: $("#inputFirstName").val().trim(),
         lastName: $("#inputLastName").val().trim(),
@@ -45,13 +45,13 @@ $("#submit-new-user").on("click", function(event) {
 
     $("#add-success").show();
 
-    $("#inputUsernameNew").empty();
-    $("#inputPasswordNew").empty();
-    $("#inputFirstName").empty();
-    $("#inputLastName").empty();
-    $("#inputAddress").empty();
-    $("#inputAddress2").empty();
-    $("#inputCity").empty();
+    $("#inputEmailNew").val("");
+    $("#inputPasswordNew").val("");
+    $("#inputFirstName").val("");
+    $("#inputLastName").val("");
+    $("#inputAddress").val("");
+    $("#inputAddress2").val("");
+    $("#inputCity").val("");
     $("#inputState").val("");
-    $("#inputZip").empty();
+    $("#inputZip").val("");
 });
