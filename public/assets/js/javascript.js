@@ -57,37 +57,37 @@ $(document).ready(function() {
         if ($("#health_type6").prop('checked')) {
             query += "&health=" + health6;
         }
-
-
-
         if (exceptions.length > 1) {
 
             for (var i = 0; i < exceptions.length; i++) {
                 query += "&excluded=" + exceptions[i];
             }
         }
-
-
-
-
         $.get(query).
         then(function(response) {
             $(".storage").empty();
             console.log(response);
             var button = $("<button>");
+            var buttonDiv = $("<div>");
+            buttonDiv.addClass("buttonDiv");
             button.attr("id", "reset");
             button.addClass("btn btn-primary");
             button.text("Search Again");
+            buttonDiv.append(button);
 
             // console.log(response.hits[0].recipe.ingredientLines[5]);
             for (var i = 0; i < response.hits.length; i++) {
                 var healthList = $("<ol>");
                 var ingredientList = $("<ol>");
                 var recipe = $("<div>");
-                var title = $("<h3>");
+                var title = $("<h4>");
                 var image = $("<img>");
                 var url = $("<a>");
-                ingredientList.text("The Ingredients")
+                var miniDiv = $("<div>");
+                var listDiv = $("<div>");
+                listDiv.attr("id", "listDiv");
+                miniDiv.attr("id", "miniDiv");
+
                 healthList.text("Health Benefits:");
                 title.text(response.hits[i].recipe.label);
                 url.text("Link to the Recipe");
@@ -95,15 +95,19 @@ $(document).ready(function() {
                     href: response.hits[i].recipe.url,
                     target: "_blank"
                 });
+                ingredientList.text("The Ingredients");
+                miniDiv.append(url);
+                listDiv.append(healthList, ingredientList);
+                recipe.addClass("recipe");
                 image.attr("src", response.hits[i].recipe.image);
-                recipe.append(title, image);
+                recipe.prepend(title, image, miniDiv, listDiv);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
 
                     for (var k = 0; k < response.hits[i].recipe.dietLabels.length; k++) {
 
                         var diet = $("<p>");
                         diet.text("Diet type: " + response.hits[i].recipe.dietLabels[k]);
-                        recipe.append(diet);
+                        miniDiv.prepend(diet);
                     }
                 }
                 for (var j = 0; j < response.hits[i].recipe.healthLabels.length; j++) {
@@ -117,18 +121,19 @@ $(document).ready(function() {
                     var ingredient = $("<li>");
                     ingredient.text(count + ": " + response.hits[i].recipe.ingredientLines[n]);
                     ingredientList.append(ingredient);
-                    console.log("test");
+
                 }
-                recipe.append(ingredientList, healthList, url);
                 $(".storage").append(recipe);
             }
-            $(".storage").append(button);
+            $(".storage").append(buttonDiv);
+
 
         })
     });
     $(".storage").on("click", "#reset", function(event) {
-
         event.preventDefault();
         location.reload();
+        $(this).remove();
+        console.log("test");
     });
 });
