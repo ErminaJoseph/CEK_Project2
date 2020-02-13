@@ -55,3 +55,7 @@ $("#submit-new-user").on("click", function(event) {
     $("#inputState").val("");
     $("#inputZip").val("");
 });
+
+$(".navbar-toggler").on("click", function (e) {
+    
+});
