@@ -1,6 +1,6 @@
-var username;
+var email;
 var password;
-var newUsername;
+var newemail;
 var newPassword;
 var firstName;
 var lastName;
@@ -18,10 +18,41 @@ $("#login-submit").on("click", function(event) {
     event.preventDefault();
 
     var loginCredentials = {
+
         email: $("#inputEmail").val().trim(),
+
+       
+
         password: $("#inputPassword").val().trim()
     };
 
+    if (!userData.email || !userData.password) {
+        return;
+      }
+  
+      // If we have an email and password we run the loginUser function and clear the form
+      loginUser(userData.email, userData.password);
+      emailInput.val("");
+      passwordInput.val("");
+    });
+  
+    // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
+    function loginUser(email, password) {
+      $.post("/api/login", {
+        email: email,
+        password: password
+      })
+        .then(function() {
+          window.location.replace("/members");
+          // If there's an error, log the error
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    }
+  
+});
+    
     console.log(loginCredentials);
 });
 
@@ -30,6 +61,7 @@ $("#submit-new-user").on("click", function(event) {
     event.preventDefault();
 
     var newUser = {
+
         newEmail: $("#inputEmailNew").val().trim(),
         newPassword: $("#inputPasswordNew").val().trim(),
         firstName: $("#inputFirstName").val().trim(),
@@ -39,11 +71,44 @@ $("#submit-new-user").on("click", function(event) {
         city: $("#inputCity").val().trim(),
         state: $("#inputState").val().trim(),
         zipCode: $("#inputZip").val().trim()
+
+    
+
+        if (!userData.email || !userData.password) {
+            return;
+          }
+          // If we have an email and password, run the signUpUser function
+          signUpUser(userData.email, userData.password);
+          emailInput.val("");
+          passwordInput.val("");
+        });
+      
+        // Does a post to the signup route. If successful, we are redirected to the members page
+        // Otherwise we log any errors
+        function signUpUser(email, password) {
+          $.post("/api/signup", {
+            email: email,
+            password: password
+          })
+            .then(function(data) {
+              window.location.replace("/members");
+              // If there's an error, handle it by throwing up a bootstrap alert
+            })
+            .catch(handleLoginErr);
+        }
+      
+        function handleLoginErr(err) {
+          $("#alert .msg").text(err.responseJSON);
+          $("#alert").fadeIn(500);
+        }
+      });
+
     };
 
     console.log(newUser);
 
     $("#add-success").show();
+
 
     $("#inputEmailNew").val("");
     $("#inputPasswordNew").val("");
@@ -58,4 +123,6 @@ $("#submit-new-user").on("click", function(event) {
 
 $(".navbar-toggler").on("click", function (e) {
     
+
+
 });
