@@ -97,16 +97,19 @@ $(document).ready(function() {
                 if (response.hits[i].recipe.ingredientLines.length <= 5) {
                     total += 20;
                     cost.text("Cost of this recipe 20 dollars");
+                    recipe.attr("cost", 20);
                     miniDiv.append(cost);
                 }
                 if (response.hits[i].recipe.ingredientLines.length > 5 && response.hits[i].recipe.ingredientLines.length < 10) {
                     total += 40;
                     cost.text("Cost of this recipe 40 dollars");
+                    recipe.attr("cost", 40);
                     miniDiv.append(cost);
                 }
                 if (response.hits[i].recipe.ingredientLines.length >= 10) {
                     total += 60;
                     cost.text("Cost of this recipe 60 dollars");
+                    recipe.attr("cost", 60);
                     miniDiv.append(cost);
                 }
                 // if (i = response.hits.length) {
@@ -155,7 +158,7 @@ $(document).ready(function() {
                 $(".storage").append(recipe);
             }
             console.log(total)
-            totalDiv.text("Your total is " + total) + " dollars";
+            totalDiv.text("Your total is " + total + " dollars");
             $(".storage").append(totalDiv, buttonDiv);
 
 
@@ -167,8 +170,11 @@ $(document).ready(function() {
         $(this).remove();
     });
     $(".storage").on("click", ".recipe", ".remove", function(event) {
+        var cost = $(this).attr("cost");
+        total -= cost;
+        totalDiv.text("Your total is " + total + " dollars");
         event.preventDefault();
-        console.log(this.id);
+        console.log(cost);
         $(this).remove();
     })
 });
