@@ -12,4 +12,7 @@ module.exports = function(app) {
     app.get("/dashboard", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/dashboard.html"));
     });
+    app.get("/profile", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/profile.html"));
+    });
 };

@@ -9,24 +9,22 @@ var addressTwo;
 var city;
 var state;
 var zipCode;
+var loginCredentials;
 
+$("#welcome").text("Welcome " + firstName +"!");
 
 $("#add-success").hide();
 
 $("#login-submit").on("click", function(event) {
-    
-    event.preventDefault();
 
+    event.preventDefault();
     var loginCredentials = {
 
         email: $("#inputEmail").val().trim(),
-
-       
-
         password: $("#inputPassword").val().trim()
     };
 
-    if (!userData.email || !userData.password) {
+    if (!email || password) {
         return;
       }
   
@@ -50,11 +48,9 @@ $("#login-submit").on("click", function(event) {
           console.log(err);
         });
     }
-  
-});
     
     console.log(loginCredentials);
-});
+
 
 $("#submit-new-user").on("click", function(event) {
     
@@ -71,8 +67,7 @@ $("#submit-new-user").on("click", function(event) {
         city: $("#inputCity").val().trim(),
         state: $("#inputState").val().trim(),
         zipCode: $("#inputZip").val().trim()
-
-    
+    }   
 
         if (!userData.email || !userData.password) {
             return;
@@ -81,8 +76,20 @@ $("#submit-new-user").on("click", function(event) {
           signUpUser(userData.email, userData.password);
           emailInput.val("");
           passwordInput.val("");
-        });
-      
+
+          $("#add-success").show();
+          $("#inputEmailNew").val("");
+          $("#inputPasswordNew").val("");
+          $("#inputFirstName").val("");
+          $("#inputLastName").val("");
+          $("#inputAddress").val("");
+          $("#inputAddress2").val("");
+          $("#inputCity").val("");
+          $("#inputState").val("");
+          $("#inputZip").val("");
+
+});
+    
         // Does a post to the signup route. If successful, we are redirected to the members page
         // Otherwise we log any errors
         function signUpUser(email, password) {
@@ -101,28 +108,11 @@ $("#submit-new-user").on("click", function(event) {
           $("#alert .msg").text(err.responseJSON);
           $("#alert").fadeIn(500);
         }
-      });
-
-    };
+      
 
     console.log(newUser);
 
-    $("#add-success").show();
 
 
-    $("#inputEmailNew").val("");
-    $("#inputPasswordNew").val("");
-    $("#inputFirstName").val("");
-    $("#inputLastName").val("");
-    $("#inputAddress").val("");
-    $("#inputAddress2").val("");
-    $("#inputCity").val("");
-    $("#inputState").val("");
-    $("#inputZip").val("");
-});
-
-$(".navbar-toggler").on("click", function (e) {
-    
 
 
-});

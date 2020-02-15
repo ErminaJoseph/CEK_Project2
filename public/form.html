@@ -5,44 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Form</title>
+    <title>Couch Potato - Recipe Search</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="javascript.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Fluid jumbotron</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-        </div>
+    <div class="pos-f-t">
+        <nav class="navbar navbar-dark" style="background-color:#4d1e00">
+          <h2 id="nav-title">Couch Potato</h2>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="p-3 menu-links" style="background-color:#4d1e00">
+              <span class="text-muted">
+                  <a href="#">Profile</a>
+                  <hr>
+                  <a href="#">Log Out</a>
+              </span>
+            </div>
+          </div>
     </div>
-    <div class="row">
-        <div class="col-md-2 col-sm-2">
-            <a class="btn btn-light" href="/cms">New Post</a>
-        </div>
-        <div class="col-md-2 col-sm-2">
-            <a class="btn btn-light" href="/authors">Manage Authors</a>
-        </div>
-    </div>
-    <div class="storage">
+
+    <br>
+
+    <div class="container" id="form-formatting">
         <form>
+            <h3>Search For A Recipe</h3>
+            <br>
             <div class="form-group">
-                <label for="ingredient_input">The Main Ingredient</label>
+                <label for="ingredient_input"><b>The Main Ingredient</b></label>
                 <input type="text" class="form-control" id="main_ingredient" aria-describedby="ingredient" placeholder="example pork">
 
             </div>
+            <br>
             <div class="form-group">
-                <label for="ingredient_input">Ingredients you dont want in your food</label>
+                <label for="ingredient_input"><b>Ingredients you dont want in your food</b></label>
                 <input type="text" class="form-control" id="exceptions" aria-describedby="ingredient" placeholder="example salt, pepper, garlic">
 
             </div>
+            <br>
             <div class="form-row align-items-center">
                 <div class="col-auto my-1">
-                    <label class="mr-sm-2" for="inlineFormCustomSelect">Diet Types</label>
+                    <label class="mr-sm-2" for="inlineFormCustomSelect"><b>Diet Types</b></label>
                     <select class="custom-select mr-sm-2" id="diet_type">
                 <option value="" disabled selected>Select a Diet</option>
                 <option value="balanced">Balanced</option>
@@ -66,17 +78,22 @@
 
                     <input class="form-check-input" type="checkbox" value="tree-nut-free" id="health_type4">
                     <label class="form-check-label" for="defaultCheck2">Tree Nut</label>
-
+                    <br>
                     <input class="form-check-input" type="checkbox" value="sugar-conscious" id="health_type5">
                     <label class="form-check-label" for="defaultCheck2">Sugar Conscious</label>
 
                     <input class="form-check-input" type="checkbox" value="alcohol-free" id="health_type6">
                     <label class="form-check-label" for="defaultCheck2">Alcohol Free</label>
                 </div>
-
-                <button id="user_search" type="submit" class="btn btn-primary">Find Some Recipes</button>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button id="user_search" type="submit">Find Some Recipes</button>
         </form>
-        </div>
+    </div>
 </body>
+
+
 
 </html>
