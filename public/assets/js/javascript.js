@@ -70,15 +70,22 @@ $(document).ready(function() {
             console.log(response);
             var button = $("<button>");
             var buttonDiv = $("<div>");
-
-            totalDiv.addClass("totalDiv")
+            var totalButton = $("<button>");
+            totalButton.attr({
+                id: "totalButton",
+                "data-toggle": "modal",
+                "data-target": "#purchase"
+            });
+            totalButton.addClass("btn btn-primary my-1");
+            totalButton.text("Purchase These Recipes");
+            totalDiv.addClass("totalDiv");
             buttonDiv.addClass("buttonDiv");
             button.attr("id", "reset");
             button.addClass("btn btn-primary");
             button.text("Search Again");
-            buttonDiv.append(button);
+            buttonDiv.append(button, totalButton);
 
-            // console.log(response.hits[0].recipe.ingredientLines[5]);
+
             for (var i = 0; i < response.hits.length; i++) {
                 var healthList = $("<ol>");
                 var ingredientList = $("<ol>");
@@ -90,6 +97,7 @@ $(document).ready(function() {
                 var listDiv = $("<div>");
                 var cost = $("<p>");
                 var removeButton = $("<button>");
+
                 removeButton.attr("id", i);
                 removeButton.addClass("remove");
                 removeButton.text("Remove This Recipe");
@@ -112,9 +120,6 @@ $(document).ready(function() {
                     recipe.attr("cost", 60);
                     miniDiv.append(cost);
                 }
-                // if (i = response.hits.length) {
-                //     console.log("test");
-                // }
 
                 listDiv.attr("id", "listDiv");
                 miniDiv.attr("id", "miniDiv");
@@ -169,12 +174,20 @@ $(document).ready(function() {
         location.reload();
         $(this).remove();
     });
+    $("body").on("click", "#totalButton", function(add_to) {
+        $($(this).data("#purchase")).modal("show");
+        add_to.preventDefault();
+        var purchaseDiv = $("<div>");
+        purchaseDiv.html("Thanks for your purchase your total is" + total)
+        console.log("test");
+        $("#data").append(purchaseDiv);
+
+    });
     $(".storage").on("click", ".recipe", ".remove", function(event) {
         var cost = $(this).attr("cost");
         total -= cost;
         totalDiv.text("Your total is " + total + " dollars");
         event.preventDefault();
-        console.log(cost);
         $(this).remove();
-    })
+    });
 });
