@@ -1,8 +1,8 @@
 $(document).ready(function() {
     var total = 0
     var totalDiv = $("<div>");
-    var recipe = [];
-    var recipeObject = {};
+    var recipeArray = [];
+
 
 
     // var stuff = {
@@ -38,7 +38,7 @@ $(document).ready(function() {
         var health4 = $("#health_type4").val();
         var health5 = $("#health_type5").val();
         var health6 = $("#health_type6").val();
-        var query = "https://api.edamam.com/search?q=" + main_Ingredient + "&app_id=cae2ccda&app_key=d907c995bb581b76c6e4492ff1c9bb4e&to=5";
+        var query = "https://cors-anywhere.herokuapp.com/https://api.edamam.com/search?q=" + main_Ingredient + "&app_id=cae2ccda&app_key=d907c995bb581b76c6e4492ff1c9bb4e&to=5";
         if (dietType !== null) {
             query += "&diet=" + dietType.trim();
         }
@@ -88,17 +88,15 @@ $(document).ready(function() {
             button.addClass("btn btn-primary");
             button.text("Search Again");
             buttonDiv.append(button, totalButton);
-
-
             for (var i = 0; i < response.hits.length; i++) {
-
+                var recipeObject = {};
                 recipeObject.name = response.hits[i].recipe.label
                 recipeObject.recipe = response.hits[i].recipe.url
 
 
 
-                recipe.push(recipeObject);
-                console.log(recipe);
+                recipeArray.push(recipeObject);
+
                 var healthList = $("<ol>");
                 var ingredientList = $("<ol>");
                 var recipe = $("<div>");
@@ -187,21 +185,29 @@ $(document).ready(function() {
         $(this).remove();
     });
     $(".storage").on("click", "#totalButton", function(add_to) {
-        $("#purchase").modal("show");
+        // $("#purchase").modal("show");
         add_to.preventDefault();
         var purchaseDiv = $("<div>");
-        purchaseDiv.html("Thanks for your purchase your total is" + total)
-        console.log(recipe);
+        purchaseDiv.text("Thanks for your purchase your total is " + total)
+        console.log(recipeArray);
         $("#data").append(purchaseDiv);
 
     });
     $(".storage").on("click", ".recipe", ".remove", function(event) {
+
         var cost = $(this).attr("cost");
+        recipeArray.splice(this.id, 1);
         total -= cost;
-        totalDiv.text("Your total is " + total + " dollars");
+        totalDiv.html("Your total is " + total + " dollars");
         event.preventDefault();
         $(this).remove();
-        console.log(this.id);
+        console.log(recipeArray);
     });
-
+    // $("#close").on("click", function() {
+    //     totalDiv.html("");
+    //     console.log("test");
+    // })
+    $(".modal").on("hidden.bs.modal", function() {
+        $(".modal-content").empty();
+    });
 });
