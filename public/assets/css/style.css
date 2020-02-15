@@ -2,10 +2,43 @@ body {
     background-color: #fffbd0;
 }
 
+ol {
+    float: left;
+    width: 45%;
+    margin-left: 35px;
+    border: 2px black solid;
+}
+
+img {
+    width: 50%;
+    height: 300px;
+    margin: 0 auto;
+    border: 2px blue solid;
+}
+
+a {
+    margin: 5px auto;
+    text-align: center;
+}
+
 .container {
     text-align: center;
     background-color: white;
     width: 500px;
+}
+
+.storage {
+    text-align: center;
+    width: 80%;
+    border: 2px black solid;
+    margin: 10px auto;
+}
+
+.recipe {
+    width: 100%;
+    margin-bottom: 30px;
+    height: 750px;
+    border-bottom: 2px black solid;
 }
 
 h3 {
@@ -13,7 +46,45 @@ h3 {
     color: #ac682c;
 }
 
+h4 {
+    text-align: center;
+}
+
+.form-check-label {
+    margin-left: 30px;
+}
+
+.form-check-input {
+    margin-left: 5px;
+}
+
+.totalDiv {
+    width: 40%;
+    border: 2px solid black;
+    margin: 10px auto;
+}
+
 #add-user {
     text-align: left;
     font-size: small;
+}
+
+.buttonDiv {
+    width: 100%;
+}
+
+#reset {
+    margin: 0 auto;
+}
+
+#miniDiv {
+    width: 100%;
+}
+
+#listDiv {
+    width: 100%;
+}
+
+#user_search {
+    margin-left: 5px;
 }
