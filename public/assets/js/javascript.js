@@ -1,6 +1,8 @@
 $(document).ready(function() {
     var total = 0
     var totalDiv = $("<div>");
+    var recipe = [];
+    var recipeObject = {};
 
 
     // var stuff = {
@@ -66,15 +68,17 @@ $(document).ready(function() {
         }
         $.get(query).
         then(function(response) {
+
             $(".storage").empty();
             console.log(response);
             var button = $("<button>");
             var buttonDiv = $("<div>");
-            var totalButton = $("<button>");
+            var totalButton = $("<a>");
             totalButton.attr({
                 id: "totalButton",
                 "data-toggle": "modal",
-                "data-target": "#purchase"
+                href: "#sale",
+                role: "button"
             });
             totalButton.addClass("btn btn-primary my-1");
             totalButton.text("Purchase These Recipes");
@@ -87,6 +91,14 @@ $(document).ready(function() {
 
 
             for (var i = 0; i < response.hits.length; i++) {
+
+                recipeObject.name = response.hits[i].recipe.label
+                recipeObject.recipe = response.hits[i].recipe.url
+
+
+
+                recipe.push(recipeObject);
+                console.log(recipe);
                 var healthList = $("<ol>");
                 var ingredientList = $("<ol>");
                 var recipe = $("<div>");
@@ -98,7 +110,6 @@ $(document).ready(function() {
                 var cost = $("<p>");
                 var removeButton = $("<button>");
 
-                removeButton.attr("id", i);
                 removeButton.addClass("remove");
                 removeButton.text("Remove This Recipe");
 
@@ -135,7 +146,7 @@ $(document).ready(function() {
                 miniDiv.append(url);
                 listDiv.append(healthList, ingredientList);
                 recipe.addClass("recipe");
-                recipe.attr("id", "div" + i);
+                recipe.attr("id", i);
                 image.attr("src", response.hits[i].recipe.image);
                 recipe.prepend(title, image, miniDiv, listDiv, removeButton);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
@@ -161,8 +172,9 @@ $(document).ready(function() {
 
                 }
                 $(".storage").append(recipe);
+
             }
-            console.log(total)
+
             totalDiv.text("Your total is " + total + " dollars");
             $(".storage").append(totalDiv, buttonDiv);
 
@@ -174,12 +186,12 @@ $(document).ready(function() {
         location.reload();
         $(this).remove();
     });
-    $("body").on("click", "#totalButton", function(add_to) {
-        $($(this).data("#purchase")).modal("show");
+    $(".storage").on("click", "#totalButton", function(add_to) {
+        $("#purchase").modal("show");
         add_to.preventDefault();
         var purchaseDiv = $("<div>");
         purchaseDiv.html("Thanks for your purchase your total is" + total)
-        console.log("test");
+        console.log(recipe);
         $("#data").append(purchaseDiv);
 
     });
@@ -189,5 +201,7 @@ $(document).ready(function() {
         totalDiv.text("Your total is " + total + " dollars");
         event.preventDefault();
         $(this).remove();
+        console.log(this.id);
     });
+
 });
