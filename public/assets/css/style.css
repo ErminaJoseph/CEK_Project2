@@ -41,7 +41,7 @@ a {
     border-bottom: 2px black solid;
 }
 
-h3 {
+h3, #nav-title {
     font-family: 'Acme', sans-serif;
     color: #ac682c;
 }
@@ -88,3 +88,24 @@ h4 {
 #user_search {
     margin-left: 5px;
 }
+
+.main-logo {
+    border: 0px;
+    height: 200px;
+    width: 250px;
+}
+
+
+#welcome {
+    font-family: 'Acme', sans-serif;
+    color: #ac682c;
+}
+
+.navbar-toggler, .menu-links {
+    margin-left: 1000px;
+}
+
+#form-formatting {
+    text-align: left;
+}
+
