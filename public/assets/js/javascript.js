@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+    var total = 0
+    var totalDiv = $("<div>");
 
 
     // var stuff = {
@@ -69,8 +70,7 @@ $(document).ready(function() {
             console.log(response);
             var button = $("<button>");
             var buttonDiv = $("<div>");
-            var total = 0
-            var totalDiv = $("<div>");
+
             totalDiv.addClass("totalDiv")
             buttonDiv.addClass("buttonDiv");
             button.attr("id", "reset");
@@ -89,8 +89,12 @@ $(document).ready(function() {
                 var miniDiv = $("<div>");
                 var listDiv = $("<div>");
                 var cost = $("<p>");
+                var removeButton = $("<button>");
+                removeButton.attr("id", i);
+                removeButton.addClass("remove");
+                removeButton.text("Remove This Recipe");
 
-                if (response.hits[i].recipe.ingredientLines.length < 5) {
+                if (response.hits[i].recipe.ingredientLines.length <= 5) {
                     total += 20;
                     cost.text("Cost of this recipe 20 dollars");
                     miniDiv.append(cost);
@@ -100,7 +104,7 @@ $(document).ready(function() {
                     cost.text("Cost of this recipe 40 dollars");
                     miniDiv.append(cost);
                 }
-                if (response.hits[i].recipe.ingredientLines.length > 10) {
+                if (response.hits[i].recipe.ingredientLines.length >= 10) {
                     total += 60;
                     cost.text("Cost of this recipe 60 dollars");
                     miniDiv.append(cost);
@@ -123,9 +127,9 @@ $(document).ready(function() {
                 miniDiv.append(url);
                 listDiv.append(healthList, ingredientList);
                 recipe.addClass("recipe");
-                recipe.attr("id", i);
+                recipe.attr("id", "div" + i);
                 image.attr("src", response.hits[i].recipe.image);
-                recipe.prepend(title, image, miniDiv, listDiv);
+                recipe.prepend(title, image, miniDiv, listDiv, removeButton);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
 
                     for (var k = 0; k < response.hits[i].recipe.dietLabels.length; k++) {
@@ -161,6 +165,10 @@ $(document).ready(function() {
         event.preventDefault();
         location.reload();
         $(this).remove();
-
     });
+    $(".storage").on("click", ".recipe", ".remove", function(event) {
+        event.preventDefault();
+        console.log(this.id);
+        $(this).remove();
+    })
 });
