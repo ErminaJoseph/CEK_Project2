@@ -27,6 +27,7 @@ $("#login-submit").on("click", function (event) {
   if (!loginCredentials.email || !loginCredentialspassword) {
     return;
   }
+  
 
   // // If we have an email and password we run the loginUser function and clear the form
   // loginUser(loginCredentials.email, loginCredentials.password);
@@ -111,6 +112,19 @@ $("#submit-new-user").on("click", function (event) {
     $("#alert").fadeIn(500);
   }
 
+
+
+  $("#add-success").show();
+
+  $("#inputEmailNew").val("");
+  $("#inputPasswordNew").val("");
+  $("#inputFirstName").val("");
+  $("#inputLastName").val("");
+  $("#inputAddress").val("");
+  $("#inputAddress2").val("");
+  $("#inputCity").val("");
+  $("#inputState").val("");
+  $("#inputZip").val("");
 
   console.log(newUser);
 
