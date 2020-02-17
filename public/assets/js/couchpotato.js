@@ -59,7 +59,7 @@ $("#submit-new-user").on("click", function (event) {
   event.preventDefault();
 
   var newUser = {
-    newEmail: $("#inputEmailnameNew").val().trim(),
+    newEmail: $("#inputEmailNew").val().trim(),
     newPassword: $("#inputPasswordNew").val().trim(),
     firstName: $("#inputFirstName").val().trim(),
     lastName: $("#inputLastName").val().trim(),
@@ -102,56 +102,10 @@ $("#submit-new-user").on("click", function (event) {
         console.log(data);
         // If there's an error, handle it by throwing up a bootstrap alert
       })
-        .then(function() {
-          window.location.replace("/members");
-          // If there's an error, log the error
-        })
-        .catch(function(err) {
+        .fail(function(err) {
           console.log(err);
         });
     }
-    
-    console.log(loginCredentials);
-
-
-$("#submit-new-user").on("click", function(event) {
-    
-    event.preventDefault();
-
-    var newUser = {
-
-        newEmail: $("#inputEmailNew").val().trim(),
-        newPassword: $("#inputPasswordNew").val().trim(),
-        firstName: $("#inputFirstName").val().trim(),
-        lastName: $("#inputLastName").val().trim(),
-        address: $("#inputAddress").val().trim(),
-        addressTwo: $("#inputAddress2").val().trim(),
-        city: $("#inputCity").val().trim(),
-        state: $("#inputState").val().trim(),
-        zipCode: $("#inputZip").val().trim()
-    }   
-
-        if (!userData.email || !userData.password) {
-            return;
-          }
-          // If we have an email and password, run the signUpUser function
-          signUpUser(userData.email, userData.password);
-          emailInput.val("");
-          passwordInput.val("");
-
-          $("#add-success").show();
-          $("#inputEmailNew").val("");
-          $("#inputPasswordNew").val("");
-          $("#inputFirstName").val("");
-          $("#inputLastName").val("");
-          $("#inputAddress").val("");
-          $("#inputAddress2").val("");
-          $("#inputCity").val("");
-          $("#inputState").val("");
-          $("#inputZip").val("");
-
-});
-    
         // Does a post to the signup route. If successful, we are redirected to the members page
         // Otherwise we log any errors
         function signUpUser(email, password) {
@@ -159,11 +113,11 @@ $("#submit-new-user").on("click", function(event) {
             email: email,
             password: password
           })
-            .then(function(data) {
+            .done(function(data) {
               window.location.replace("/members");
               // If there's an error, handle it by throwing up a bootstrap alert
             })
-            .catch(handleLoginErr);
+            .fail(handleLoginErr);
         }
       
         function handleLoginErr(err) {
