@@ -15,25 +15,6 @@ $("#welcome").text("Welcome " + firstName +"!");
 
 $("#add-success").hide();
 
-<<<<<<< HEAD
-$("#login-submit").on("click", function(event) {
-
-    event.preventDefault();
-    var loginCredentials = {
-
-        email: $("#inputEmail").val().trim(),
-        password: $("#inputPassword").val().trim()
-    };
-
-    if (!email || password) {
-        return;
-      }
-  
-      // If we have an email and password we run the loginUser function and clear the form
-      loginUser(userData.email, userData.password);
-      emailInput.val("");
-      passwordInput.val("");
-=======
 $("#login-submit").on("click", function (event) {
 
   event.preventDefault();
@@ -65,7 +46,6 @@ function loginUser(email, password, ) {
     })
     .catch(function (err) {
       console.log(err);
->>>>>>> users
     });
 }
 
