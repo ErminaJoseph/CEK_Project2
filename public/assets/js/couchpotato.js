@@ -11,7 +11,7 @@ var state;
 var zipCode;
 var loginCredentials;
 
-$("#welcome").text("Welcome " + firstName +"!");
+$("#welcome").text("Welcome " + firstName + "!");
 
 $("#add-success").hide();
 
@@ -102,32 +102,18 @@ $("#submit-new-user").on("click", function (event) {
         console.log(data);
         // If there's an error, handle it by throwing up a bootstrap alert
       })
-        .fail(function(err) {
-          console.log(err);
-        });
-    }
-        // Does a post to the signup route. If successful, we are redirected to the members page
-        // Otherwise we log any errors
-        function signUpUser(email, password) {
-          $.post("/api/signup", {
-            email: email,
-            password: password
-          })
-            .done(function(data) {
-              window.location.replace("/members");
-              // If there's an error, handle it by throwing up a bootstrap alert
-            })
-            .fail(handleLoginErr);
-        }
-      
-        function handleLoginErr(err) {
-          $("#alert .msg").text(err.responseJSON);
-          $("#alert").fadeIn(500);
-        }
-      
-
-    console.log(newUser);
-
-
+      .fail(function (err) {
+        console.log(err);
       });
+  }
+  function handleLoginErr(err) {
+    $("#alert .msg").text(err.responseJSON);
+    $("#alert").fadeIn(500);
+  }
+
+
+  console.log(newUser);
+
+
+});
 
