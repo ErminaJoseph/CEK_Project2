@@ -1,5 +1,5 @@
 body {
-    background-color: #fffbd0;
+    background: url("background.jpg");
 }
 
 ol {
@@ -107,8 +107,16 @@ h4 {
     color: #ac682c;
 }
 
-.navbar-toggler, .menu-links {
+.navbar-toggler {
     margin-left: 1000px;
+}
+
+.menu-links {
+    margin-left: 1200px;
+}
+
+.nav-link {
+    color: white;
 }
 
 #form-formatting {
