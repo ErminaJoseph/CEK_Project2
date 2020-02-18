@@ -53,12 +53,88 @@ module.exports = function(app) {
 
     });
     app.get("/api/total/:id", function(req, res) {
-            // console.log(req.params.id);
-            db.User.findAll({ where: { id: req.params.id } }).then(function(response) {
+        // console.log(req.params.id);
+        db.User.findAll({ where: { id: req.params.id } }).then(function(response) {
 
-                return res.json(response);
+            return res.json(response);
 
-            })
+        })
+    });
+    app.put("/api/update", function(req, res) {
+            console.log(req.body.firstName.length);
+            if (req.body.firstName.length > 0) {
+                db.User.update({
+                    firstName: req.body.firstName
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("first name updated");
+                })
+            }
+            if (req.body.lastName.length > 0) {
+                db.User.update({
+                    lastName: req.body.lastName
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("last name updated");
+                })
+            }
+            if (req.body.email.length > 0) {
+                db.User.update({
+                    email: req.body.email
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("email updated");
+                })
+            }
+            if (req.body.password.length > 0) {
+                db.User.update({
+                    password: req.body.password
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("password updated");
+                })
+            }
+            if (req.body.address.length > 0) {
+                db.User.update({
+                    lastName: req.body.address
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("address updated");
+                })
+            }
+            if (req.body.city.length > 0) {
+                db.User.update({
+                    lastName: req.body.city
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("city updated");
+                })
+            }
+            if (req.body.state.length > 0) {
+                db.User.update({
+                    lastName: req.body.state
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("state updated");
+                })
+            }
+            if (req.body.zipCode.length > 0) {
+                db.User.update({
+                    lastName: req.body.zipCode
+                }, {
+                    where: { id: req.body.id }
+                }).then(function(response) {
+                    console.log("zip code updated");
+                })
+            }
+
         })
         // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
         // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
