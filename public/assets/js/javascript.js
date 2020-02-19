@@ -4,6 +4,7 @@ $(document).ready(function() {
     var recipeArray = [];
     $("#user_search").on("click", function(event) {
         event.preventDefault();
+
         var main_Ingredient = $("#main_ingredient").val().trim();
         var exceptions = $("#exceptions").val().trim().split(", ")
         var dietType = $("#diet_type").val();
@@ -42,6 +43,7 @@ $(document).ready(function() {
         }
         $.get(query).
         then(function(response) {
+
             $(".storage").empty();
             var button = $("<button>");
             var buttonDiv = $("<div>");
@@ -142,10 +144,18 @@ $(document).ready(function() {
     });
     $(".storage").on("click", "#totalButton", function(add_to) {
         add_to.preventDefault();
+        var id = JSON.parse(localStorage.getItem("id"));
         var purchaseDiv = $("<div>");
-        purchaseDiv.text("Thanks for your purchase your total is " + total)
-        console.log(recipeArray);
-        $("#data").append(purchaseDiv);
+        $.get("/api/total/" + id, function(data) {
+            // console.log(data);
+            // console.log(data[0].firstName);
+            // console.log(data[0].lastName);
+            // console.log(data[0].email);
+            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
+            $("#data").append(purchaseDiv);
+        })
+
+
     });
     $(".storage").on("click", ".recipe", ".remove", function(event) {
         var cost = $(this).attr("cost");
