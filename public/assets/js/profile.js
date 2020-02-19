@@ -26,14 +26,14 @@ $(document).ready(function() {
         };
         console.log(updateUser);
         $.ajax({
-                method: "PUT",
-                url: "/api/update",
-                data: updateUser
-            })
-            .then(function(data) {
-                console.log(data);
+            method: "PUT",
+            url: "/api/update",
+            data: updateUser
+        }).then(function(data) {
+            console.log(data);
+            location.reload();
 
-            });
+        });
 
     });
 });
