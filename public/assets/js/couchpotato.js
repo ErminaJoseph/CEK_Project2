@@ -55,47 +55,65 @@ $(document).ready(function() {
             state: $("#inputState").val().trim(),
             zipCode: $("#inputZip").val().trim()
         };
-        // console.log(newUser)
-        // if (!newUser.newEmail || !newUser.newPassword || !newUser.firstName || !newUser.lastName || !newUser.address || !newUser.addressTwo || !newUser.city || !newUser.state || !newUser.zipCode) {
-        //     return;
-        // }
-        // console.log('logging out new user;', newUser);
-        // If we have an email and password, run the signUpUser function
-        signUpUser(newUser.newEmail, newUser.newPassword, newUser.firstName, newUser.lastName, newUser.address, newUser.addressTwo, newUser.city, newUser.state, newUser.zipCode);
-        // emailInput.val("");
-        // passwordInput.val("");
-        // Does a post to the signup route. If successful, we are redirected to the members page
-        // Otherwise we log any errors
-        function signUpUser(email, password, firstName, lastName, address, addressTwo, city, state, zipCode) {
-            // console.log("test");
-            $.post("/api/signup", {
-                    email: email,
-                    password: password,
-                    firstName: firstName,
-                    lastName: lastName,
-                    address: address,
-                    addressTwo: addressTwo,
-                    city: city,
-                    state: state,
-                    zipCode: zipCode
-                })
-                .done(function(data) {
-                    localStorage.clear();
-                    // window.location.replace("/members");
+          // console.log(newUser)
+          // if (!newUser.newEmail || !newUser.newPassword || !newUser.firstName || !newUser.lastName || !newUser.address || !newUser.addressTwo || !newUser.city || !newUser.state || !newUser.zipCode) {
+          //     return;
+          // }
+          // console.log('logging out new user;', newUser);
+          // If we have an email and password, run the signUpUser function
+          signUpUser(newUser.newEmail, newUser.newPassword, newUser.firstName, newUser.lastName, newUser.address, newUser.addressTwo, newUser.city, newUser.state, newUser.zipCode);
+          // emailInput.val("");
+          // passwordInput.val("");
+          // Does a post to the signup route. If successful, we are redirected to the members page
+          // Otherwise we log any errors
+          function signUpUser(email, password, firstName, lastName, address, addressTwo, city, state, zipCode) {
+              // console.log("test");
+              $.post("/api/signup", {
+                      email: email,
+                      password: password,
+                      firstName: firstName,
+                      lastName: lastName,
+                      address: address,
+                      addressTwo: addressTwo,
+                      city: city,
+                      state: state,
+                      zipCode: zipCode
+                  })
+                  .done(function(data) {
+                      localStorage.clear();
+                      // window.location.replace("/members");
 
-                    localStorage.setItem("id", data.id);
-                    console.log(JSON.parse(localStorage.getItem("id")));
-                    // If there's an error, handle it by throwing up a bootstrap alert
-                })
-                .fail(function(err) {
-                    console.log(err);
-                });
-        }
+                      localStorage.setItem("id", data.id);
+                      console.log(JSON.parse(localStorage.getItem("id")));
+                      // If there's an error, handle it by throwing up a bootstrap alert
+                  })
+                  .fail(function(err) {
+                      console.log(err);
+                  });
+          }
 
-        function handleLoginErr(err) {
-            $("#alert .msg").text(err.responseJSON);
-            $("#alert").fadeIn(500);
-        }
+          function handleLoginErr(err) {
+              $("#alert .msg").text(err.responseJSON);
+              $("#alert").fadeIn(500);
+          }
+
+
+
+       $("#add-success").show();
+
+       $("#inputEmailNew").val("");
+       $("#inputPasswordNew").val("");
+       $("#inputFirstName").val("");
+       $("#inputLastName").val("");
+       $("#inputAddress").val("");
+       $("#inputAddress2").val("");
+       $("#inputCity").val("");
+       $("#inputState").val("");
+       $("#inputZip").val("");
+
+        console.log(newUser);
+
+
 
     });
 });
