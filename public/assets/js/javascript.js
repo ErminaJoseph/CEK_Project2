@@ -147,10 +147,6 @@ $(document).ready(function() {
         var id = JSON.parse(localStorage.getItem("id"));
         var purchaseDiv = $("<div>");
         $.get("/api/total/" + id, function(data) {
-            // console.log(data);
-            // console.log(data[0].firstName);
-            // console.log(data[0].lastName);
-            // console.log(data[0].email);
             purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
             $("#data").append(purchaseDiv);
         })
