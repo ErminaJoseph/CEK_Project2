@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     $.get("/api/total/" + id, function(data) {
         console.log(data);
-        $("#welcome").html("Name: " + data[0].firstName + " " + data[0].lastName);
+        $("#welcome").html("Welcome " + data[0].firstName + "!");
     });
     $("#logout").on("click", function(event) {
         event.preventDefault();

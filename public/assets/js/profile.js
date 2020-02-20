@@ -4,20 +4,19 @@ $(document).ready(function() {
         console.log(data[0].Recipes.length);
         var purchase = $("<div>");
         var recipes = $("<ul>");
-        recipes.text("Your Purchases");
+        recipes.html("<h5>Your Purchases</h5>");
         purchase.addClass("purchase");
-
-        $("#profile-name").html("Name: " + data[0].firstName + " " + data[0].lastName);
-        $("#profile-email").html("Email: " + data[0].email);
-        $("#profile-street-address").html("Address: " + data[0].address);
-        $("#profile-city").html("City: " + data[0].city);
-        $("#profile-state").html("State: " + data[0].state + " Zipcode: " + data[0].zipCode);
+        $("#profile-name").html("<b>Name: </b>" + data[0].firstName + " " + data[0].lastName);
+        $("#profile-email").html("<b>Email: </b>" + data[0].email);
+        $("#profile-street-address").html("<b>Address: </b>" + data[0].address);
+        $("#profile-city").html("<b>City: </b>" + data[0].city);
+        $("#profile-state").html("<b>State: </b>" + data[0].state + "   <b>Zip Code: </b>" + data[0].zipCode + "<br><br>");
         purchase.append(recipes);
         for (var i = 0; i < data[0].Recipes.length; i++) {
             console.log(data[0].Recipes[i]);
             var recipe = $("<li>");
             var url = $("<a>");
-            recipe.text("Recipe name: " + data[0].Recipes[i].name);
+            recipe.html("<b>Recipe name: </b>" + data[0].Recipes[i].name);
             url.text("Link to the Recipe");
             url.attr({
                 href: data[0].Recipes[i].url,
@@ -26,7 +25,7 @@ $(document).ready(function() {
             recipes.append(recipe, url);
 
         }
-        $("#userInfo").append(purchase);
+        $("#purchase-results").append(purchase);
 
     })
 
