@@ -3,11 +3,8 @@ $(document).ready(function() {
     var totalDiv = $("<div>");
     var recipeArray = [];
 
-    $("#form-results").hide();
     $("#user_search").on("click", function(event) {
         event.preventDefault();
-
-        $("#form-results").show();
 
         var main_Ingredient = $("#main_ingredient").val().trim();
         var exceptions = $("#exceptions").val().trim().split(", ")
@@ -137,9 +134,11 @@ $(document).ready(function() {
                     ingredientList.append(ingredient);
                 }
                 $(".storage").append(recipe);
+                
             }
             totalDiv.text("Your total is " + total + " dollars");
             $(".storage").append(totalDiv, buttonDiv);
+            $(".storage").prepend("<h2> Results: </h2>");
         })
     });
     $(".storage").on("click", "#reset", function(event) {
