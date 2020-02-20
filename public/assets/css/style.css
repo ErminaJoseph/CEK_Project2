@@ -4,16 +4,14 @@ body {
 
 ol {
     float: left;
-    width: 45%;
+    width: 90%;
     margin-left: 35px;
-    border: 2px black solid;
 }
 
 img {
-    width: 50%;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 0 auto;
-    border: 2px blue solid;
 }
 
 a {
@@ -25,23 +23,18 @@ a {
     text-align: center;
     background-color: white;
     width: 500px;
-}
-
-.storage {
-    text-align: center;
-    width: 80%;
-    border: 2px black solid;
-    margin: 10px auto;
+    overflow-y: auto;
 }
 
 .recipe {
     width: 100%;
     margin-bottom: 30px;
-    height: 750px;
-    border-bottom: 2px black solid;
+    padding-top: 10px;
+    clear: both;
+    border-top: 1px grey solid;
 }
 
-h3, #nav-title {
+h3, h2, #nav-title {
     font-family: 'Acme', sans-serif;
     color: #ac682c;
 }
@@ -59,9 +52,10 @@ h4 {
 }
 
 .totalDiv {
-    width: 40%;
-    border: 2px solid black;
+    width: 100%;
+    height: 100%;
     margin: 10px auto;
+    float: left;
 }
 
 #add-user {
@@ -71,20 +65,27 @@ h4 {
 
 .buttonDiv {
     width: 100%;
+    float: left;
 }
 
 #reset {
-    float: left;
-    margin-left: 300px;
+    width: 75%;
+    margin: 0 auto;
+    display:block;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 #totalButton {
-    float: left;
-    margin-left: 200px;
+    width: 75%;
+    margin: 0 auto;
+    display:block;
+    text-align: center;
 }
 
 #miniDiv {
     width: 100%;
+
 }
 
 #listDiv {
@@ -119,7 +120,17 @@ h4 {
     color: white;
 }
 
-#form-formatting {
+.storage {
     text-align: left;
+}
+
+.remove {
+    float: left;
+    clear: both;
+    margin-bottom: 20px;
+}
+
+.button {
+    float: left;
 }
 

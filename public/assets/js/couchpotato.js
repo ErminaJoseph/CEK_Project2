@@ -11,7 +11,7 @@ $(document).ready(function() {
     var state;
     var zipCode;
     var loginCredentials;
-    $("#welcome").text("Welcome " + firstName + "!");
+    
     $("#add-success").hide();
     $("#login-submit").on("click", function(event) {
         event.preventDefault();
@@ -22,6 +22,8 @@ $(document).ready(function() {
         if (!loginCredentials.email || !loginCredentialspassword) {
             return;
         }
+
+        $("#welcome").text("Welcome " + firstName + "!");
         // // If we have an email and password we run the loginUser function and clear the form
         // loginUser(loginCredentials.email, loginCredentials.password);
         // emailInput.val("");
