@@ -49,62 +49,64 @@
     </div>
 
     <br>
+    <div class="container">
+        <h2 id="form-results">Results</h2>
+        <div class="storage">
+            <form>
+                <h3>Search For A Recipe</h3>
+                <br>
+                <div class="form-group">
+                    <label for="ingredient_input"><b>The Main Ingredient</b></label>
+                    <input type="text" class="form-control" id="main_ingredient" aria-describedby="ingredient" placeholder="example pork">
 
-    <div class="storage" id="form-formatting">
-        <form>
-            <h3>Search For A Recipe</h3>
-            <br>
-            <div class="form-group">
-                <label for="ingredient_input"><b>The Main Ingredient</b></label>
-                <input type="text" class="form-control" id="main_ingredient" aria-describedby="ingredient" placeholder="example pork">
-
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="ingredient_input"><b>Ingredients you dont want in your food</b></label>
-                <input type="text" class="form-control" id="exceptions" aria-describedby="ingredient" placeholder="example salt, pepper, garlic">
-
-            </div>
-            <br>
-            <div class="form-row align-items-center">
-                <div class="col-auto my-1">
-                    <label class="mr-sm-2" for="inlineFormCustomSelect"><b>Diet Types</b></label>
-                    <select class="custom-select mr-sm-2" id="diet_type">
-                <option value="" disabled selected>Select a Diet</option>
-                <option value="balanced">Balanced</option>
-                <option value="high-protein">High Protein</option>
-                <option value="high-fiber">High Fiber</option>
-                <option value="low-fat">Low Fat</option>
-                <option value="low-carb">Low Carb</option>
-                <option value="low-sodium">Low Sodium</option>
-              </select>
                 </div>
+                <br>
+                <div class="form-group">
+                    <label for="ingredient_input"><b>Ingredients That Should Be Excluded</b></label>
+                    <input type="text" class="form-control" id="exceptions" aria-describedby="ingredient" placeholder="example salt, pepper, garlic">
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="vegan" id="health_type1">
-                    <label class="form-check-label" for="defaultCheck1">Vegan</label>
+                </div>
+                <br>
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect"><b>Diet Types</b></label>
+                        <select class="custom-select mr-sm-2" id="diet_type">
+                    <option value="" disabled selected>Select a Diet</option>
+                    <option value="balanced">Balanced</option>
+                    <option value="high-protein">High Protein</option>
+                    <option value="high-fiber">High Fiber</option>
+                    <option value="low-fat">Low Fat</option>
+                    <option value="low-carb">Low Carb</option>
+                    <option value="low-sodium">Low Sodium</option>
+                </select>
+                    </div>
 
-                    <input class="form-check-input" type="checkbox" value="vegetarian" id="health_type2">
-                    <label class="form-check-label" for="defaultCheck2">Vegetarian</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="vegan" id="health_type1">
+                        <label class="form-check-label" for="defaultCheck1">Vegan</label>
 
-                    <input class="form-check-input" type="checkbox" value="peanut-free" id="health_type3">
-                    <label class="form-check-label" for="defaultCheck2">Peanut Free</label>
+                        <input class="form-check-input" type="checkbox" value="vegetarian" id="health_type2">
+                        <label class="form-check-label" for="defaultCheck2">Vegetarian</label>
 
-                    <input class="form-check-input" type="checkbox" value="tree-nut-free" id="health_type4">
-                    <label class="form-check-label" for="defaultCheck2">Tree Nut</label>
+                        <input class="form-check-input" type="checkbox" value="peanut-free" id="health_type3">
+                        <label class="form-check-label" for="defaultCheck2">Peanut Free</label>
+
+                        <input class="form-check-input" type="checkbox" value="tree-nut-free" id="health_type4">
+                        <label class="form-check-label" for="defaultCheck2">Tree Nut</label>
+                        <br>
+                        <input class="form-check-input" type="checkbox" value="sugar-conscious" id="health_type5">
+                        <label class="form-check-label" for="defaultCheck2">Sugar Conscious</label>
+
+                        <input class="form-check-input" type="checkbox" value="alcohol-free" id="health_type6">
+                        <label class="form-check-label" for="defaultCheck2">Alcohol Free</label>
+                    </div>
                     <br>
-                    <input class="form-check-input" type="checkbox" value="sugar-conscious" id="health_type5">
-                    <label class="form-check-label" for="defaultCheck2">Sugar Conscious</label>
-
-                    <input class="form-check-input" type="checkbox" value="alcohol-free" id="health_type6">
-                    <label class="form-check-label" for="defaultCheck2">Alcohol Free</label>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <button id="user_search" type="submit">Find Some Recipes</button>
-        </form>
+                    <br>
+                    <br>
+                    <br>
+                    <button id="user_search" type="submit">Find Some Recipes</button>
+            </form>
+            </div>
         </div>
     </div>
 </body>

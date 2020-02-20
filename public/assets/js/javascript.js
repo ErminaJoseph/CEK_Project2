@@ -2,8 +2,12 @@ $(document).ready(function() {
     var total = 0
     var totalDiv = $("<div>");
     var recipeArray = [];
+
+    $("#form-results").hide();
     $("#user_search").on("click", function(event) {
         event.preventDefault();
+
+        $("#form-results").show();
 
         var main_Ingredient = $("#main_ingredient").val().trim();
         var exceptions = $("#exceptions").val().trim().split(", ")
@@ -47,19 +51,19 @@ $(document).ready(function() {
             $(".storage").empty();
             var button = $("<button>");
             var buttonDiv = $("<div>");
-            var totalButton = $("<a>");
+            var totalButton = $("<button>");
             totalButton.attr({
                 id: "totalButton",
                 "data-toggle": "modal",
                 href: "#sale",
                 role: "button"
             });
-            totalButton.addClass("btn btn-primary my-1");
+            totalButton.addClass("btn");
             totalButton.text("Purchase These Recipes");
             totalDiv.addClass("totalDiv");
             buttonDiv.addClass("buttonDiv");
             button.attr("id", "reset");
-            button.addClass("btn btn-primary");
+            button.addClass("btn");
             button.text("Search Again");
             buttonDiv.append(button, totalButton);
             for (var i = 0; i < response.hits.length; i++) {
@@ -70,7 +74,7 @@ $(document).ready(function() {
                 var healthList = $("<ol>");
                 var ingredientList = $("<ol>");
                 var recipe = $("<div>");
-                var title = $("<h4>");
+                var title = $("<h3>");
                 var image = $("<img>");
                 var url = $("<a>");
                 var miniDiv = $("<div>");
@@ -99,14 +103,14 @@ $(document).ready(function() {
                 }
                 listDiv.attr("id", "listDiv");
                 miniDiv.attr("id", "miniDiv");
-                healthList.text("Health Benefits:");
+                healthList.html("<b> Health Benefits: </b>");
                 title.text(response.hits[i].recipe.label);
-                url.text("Link to the Recipe");
+                url.html("Link to the Recipe <br> <br>");
                 url.attr({
                     href: response.hits[i].recipe.url,
                     target: "_blank"
                 });
-                ingredientList.text("The Ingredients");
+                ingredientList.html("<b> The Ingredients: </b>");
                 miniDiv.append(url);
                 listDiv.append(healthList, ingredientList);
                 recipe.addClass("recipe");
@@ -116,8 +120,8 @@ $(document).ready(function() {
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
                     for (var k = 0; k < response.hits[i].recipe.dietLabels.length; k++) {
                         var diet = $("<p>");
-                        diet.text("Diet type: " + response.hits[i].recipe.dietLabels[k]);
-                        miniDiv.prepend(diet);
+                        diet.html("<b> Diet Type: </b>" + response.hits[i].recipe.dietLabels[k]);
+                        miniDiv.prepend("<br>", diet);
                     }
                 }
                 for (var j = 0; j < response.hits[i].recipe.healthLabels.length; j++) {

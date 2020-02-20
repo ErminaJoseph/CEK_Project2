@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var id = JSON.parse(localStorage.getItem("id"));
 
     $.get("/api/total/" + id, function(data) {
@@ -11,6 +12,7 @@ $(document).ready(function() {
         localStorage.clear();
         $(location).attr('href', '/index.html')
     })
+
 
     $("#add-success").hide();
     $("#login-submit").on("click", function(event) {
@@ -27,6 +29,7 @@ $(document).ready(function() {
                 console.log("route test");
             })
         }
+
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
     // function loginUser(email, password, ) {

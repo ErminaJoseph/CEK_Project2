@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "root",
-        "password": "Themen30!",
+        "password": "root",
         "database": "couch_potato_DB",
         "host": "127.0.0.1",
         "port": 3306,
