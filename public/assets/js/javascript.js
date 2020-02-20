@@ -64,8 +64,9 @@ $(document).ready(function() {
             buttonDiv.append(button, totalButton);
             for (var i = 0; i < response.hits.length; i++) {
                 var recipeObject = {};
+                recipeObject.UserId = JSON.parse(localStorage.getItem("id"));
                 recipeObject.name = response.hits[i].recipe.label
-                recipeObject.recipe = response.hits[i].recipe.url
+                recipeObject.url = response.hits[i].recipe.url
                 recipeArray.push(recipeObject);
                 var healthList = $("<ol>");
                 var ingredientList = $("<ol>");
@@ -146,6 +147,14 @@ $(document).ready(function() {
         add_to.preventDefault();
         var id = JSON.parse(localStorage.getItem("id"));
         var purchaseDiv = $("<div>");
+
+
+        for (var r = 0; r < recipeArray.length; r++) {
+
+            $.post("/api/recipe", recipeArray[r]).then(function(response) {
+                console.log(response);
+            })
+        }
         $.get("/api/total/" + id, function(data) {
             purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
             $("#data").append(purchaseDiv);

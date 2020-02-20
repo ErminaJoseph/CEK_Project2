@@ -23,8 +23,9 @@ $(document).ready(function() {
             return;
         } else {
 
-            $.get("/api//" + loginCredentials.email, loginCredentials.password, function(data) {
-                console.log("route test");
+            $.post("/api/login/", loginCredentials, function(data) {
+                console.log(data.id);
+                localStorage.setItem("id", data.id);
             })
         }
     });
