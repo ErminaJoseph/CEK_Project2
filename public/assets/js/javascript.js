@@ -84,6 +84,7 @@ $(document).ready(function() {
                 var removeButton = $("<button>");
                 removeButton.addClass("remove");
                 removeButton.text("Remove This Recipe");
+                removeButton.attr("id", i);
                 if (response.hits[i].recipe.ingredientLines.length <= 5) {
                     total += 20;
                     cost.text("Cost of this recipe 20 dollars");
@@ -115,7 +116,7 @@ $(document).ready(function() {
                 miniDiv.append(url);
                 listDiv.append(healthList, ingredientList);
                 recipe.addClass("recipe");
-                recipe.attr("id", i);
+                recipe.attr("id", "recipe" + i);
                 image.attr("src", response.hits[i].recipe.image);
                 recipe.prepend(title, image, miniDiv, listDiv, removeButton);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
@@ -166,13 +167,14 @@ $(document).ready(function() {
 
 
     });
-    $(".storage").on("click", ".recipe", ".remove", function(event) {
-        var cost = $(this).attr("cost");
+    $(".storage").on("click", ".remove", function(event) {
+        var cost = $("#recipe" + this.id).attr("cost");
         recipeArray.splice(this.id, 1);
         total -= cost;
         totalDiv.html("Your total is " + total + " dollars");
         event.preventDefault();
-        $(this).remove();
+        console.log(this.id);
+        $("#recipe" + this.id).remove();
     });
     $(".modal").on("hidden.bs.modal", function() {
         $(".modal-content").empty();
