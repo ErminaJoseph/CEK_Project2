@@ -1,48 +1,50 @@
 $(document).ready(function() {
-    var email;
-    var password;
-    var newemail;
-    var newPassword;
-    var firstName;
-    var lastName;
-    var address;
-    var addressTwo;
-    var city;
-    var state;
-    var zipCode;
-    var loginCredentials;
-    
+
+    var id = JSON.parse(localStorage.getItem("id"));
+
+    $.get("/api/total/" + id, function(data) {
+        console.log(data);
+        $("#welcome").html("Name: " + data[0].firstName + " " + data[0].lastName);
+    });
+    $("#logout").on("click", function(event) {
+        event.preventDefault();
+
+        localStorage.clear();
+        $(location).attr('href', '/index.html')
+    })
+
+
     $("#add-success").hide();
     $("#login-submit").on("click", function(event) {
         event.preventDefault();
         var loginCredentials = {
-            email: $("#inputEmailname").val().trim(),
+            email: $("#inputEmail").val().trim(),
             password: $("#inputPassword").val().trim()
         };
-        if (!loginCredentials.email || !loginCredentialspassword) {
+        if (!loginCredentials.email || !loginCredentials.password) {
             return;
+        } else {
+
+            $.get("/api//" + loginCredentials.email, loginCredentials.password, function(data) {
+                console.log("route test");
+            })
         }
 
-        $("#welcome").text("Welcome " + firstName + "!");
-        // // If we have an email and password we run the loginUser function and clear the form
-        // loginUser(loginCredentials.email, loginCredentials.password);
-        // emailInput.val("");
-        // passwordInput.val("");
     });
     // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    function loginUser(email, password, ) {
-        $.post("/api/login", {
-                email: email,
-                password: password
-            })
-            .done(function() {
-                window.location.replace("/members");
-                // If there's an error, log the error
-            })
-            .fail(function(err) {
-                console.log(err);
-            });
-    }
+    // function loginUser(email, password, ) {
+    //     $.post("/api/login", {
+    //             email: email,
+    //             password: password
+    //         })
+    //         .done(function() {
+    //             window.location.replace("/members");
+    //             // If there's an error, log the error
+    //         })
+    //         .fail(function(err) {
+    //             console.log(err);
+    //         });
+    // }
     // console.log(loginCredentials);
     $("#submit-new-user").on("click", function(event) {
         event.preventDefault();
@@ -57,61 +59,48 @@ $(document).ready(function() {
             state: $("#inputState").val().trim(),
             zipCode: $("#inputZip").val().trim()
         };
-          // console.log(newUser)
-          // if (!newUser.newEmail || !newUser.newPassword || !newUser.firstName || !newUser.lastName || !newUser.address || !newUser.addressTwo || !newUser.city || !newUser.state || !newUser.zipCode) {
-          //     return;
-          // }
-          // console.log('logging out new user;', newUser);
-          // If we have an email and password, run the signUpUser function
-          signUpUser(newUser.newEmail, newUser.newPassword, newUser.firstName, newUser.lastName, newUser.address, newUser.addressTwo, newUser.city, newUser.state, newUser.zipCode);
-          // emailInput.val("");
-          // passwordInput.val("");
-          // Does a post to the signup route. If successful, we are redirected to the members page
-          // Otherwise we log any errors
-          function signUpUser(email, password, firstName, lastName, address, addressTwo, city, state, zipCode) {
-              // console.log("test");
-              $.post("/api/signup", {
-                      email: email,
-                      password: password,
-                      firstName: firstName,
-                      lastName: lastName,
-                      address: address,
-                      addressTwo: addressTwo,
-                      city: city,
-                      state: state,
-                      zipCode: zipCode
-                  })
-                  .done(function(data) {
-                      localStorage.clear();
-                      // window.location.replace("/members");
-
-                      localStorage.setItem("id", data.id);
-                      console.log(JSON.parse(localStorage.getItem("id")));
-                      // If there's an error, handle it by throwing up a bootstrap alert
-                  })
-                  .fail(function(err) {
-                      console.log(err);
-                  });
-          }
-
-          function handleLoginErr(err) {
-              $("#alert .msg").text(err.responseJSON);
-              $("#alert").fadeIn(500);
-          }
+        // console.log(newUser)
+        // if (!newUser.newEmail || !newUser.newPassword || !newUser.firstName || !newUser.lastName || !newUser.address || !newUser.addressTwo || !newUser.city || !newUser.state || !newUser.zipCode) {
+        //     return;
+        // }
+        // console.log('logging out new user;', newUser);
+        // If we have an email and password, run the signUpUser function
+        signUpUser(newUser.newEmail, newUser.newPassword, newUser.firstName, newUser.lastName, newUser.address, newUser.addressTwo, newUser.city, newUser.state, newUser.zipCode);
+        // emailInput.val("");
+        // passwordInput.val("");
+        // Does a post to the signup route. If successful, we are redirected to the members page
+        // Otherwise we log any errors
+        function signUpUser(email, password, firstName, lastName, address, addressTwo, city, state, zipCode) {
+            // console.log("test");
+            $.post("/api/signup", {
+                    email: email,
+                    password: password,
+                    firstName: firstName,
+                    lastName: lastName,
+                    address: address,
+                    addressTwo: addressTwo,
+                    city: city,
+                    state: state,
+                    zipCode: zipCode
+                })
+                .done(function(data) {
+                    localStorage.clear();
 
 
+                    localStorage.setItem("id", data.id);
+                    $(location).attr('href', '/form.html')
 
-       $("#add-success").show();
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+        }
 
-       $("#inputEmailNew").val("");
-       $("#inputPasswordNew").val("");
-       $("#inputFirstName").val("");
-       $("#inputLastName").val("");
-       $("#inputAddress").val("");
-       $("#inputAddress2").val("");
-       $("#inputCity").val("");
-       $("#inputState").val("");
-       $("#inputZip").val("");
+        function handleLoginErr(err) {
+            $("#alert .msg").text(err.responseJSON);
+            $("#alert").fadeIn(500);
+        }
+
 
         console.log(newUser);
 

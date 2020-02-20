@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript" src="javascript.js"></script>
+    <script src="couchpotato.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -29,17 +30,19 @@
     </div>
     <div class="pos-f-t">
         <nav class="navbar navbar-dark" style="background-color:#4d1e00">
-          <a href="dashboard.html"><h2 id="nav-title">Couch Potato</h2></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a href="dashboard.html">
+                <h2 id="nav-title">Couch Potato</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         </nav>
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="p-3 menu-links" style="background-color:#4d1e00">
-              <span class="text-muted">
+                <span class="text-muted">
                   <a class="nav-link" href="profile.html">Profile</a>
                   <hr>
-                  <a class="nav-link" href="index.html">Log Out</a>
+                  <a id ="logout" class="nav-link" href="index.html">Log Out</a>
               </span>
             </div>
         </div>
