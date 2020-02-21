@@ -107,6 +107,10 @@ $(document).ready(function() {
                 miniDiv.attr("id", "miniDiv");
                 healthList.html("<b> Health Benefits: </b>");
                 title.text(response.hits[i].recipe.label);
+                title.attr({
+                    id: "name" + i,
+                    title: response.hits[i].recipe.label
+                });
                 url.html("Link to the Recipe <br> <br>");
                 url.attr({
                     href: response.hits[i].recipe.url,
@@ -154,26 +158,32 @@ $(document).ready(function() {
         var purchaseDiv = $("<div>");
 
 
-        for (var r = 0; r < recipeArray.length; r++) {
+        // for (var r = 0; r < recipeArray.length; r++) {
 
-            $.post("/api/recipe", recipeArray[r]).then(function(response) {
-                console.log(response);
-            })
-        }
-        $.get("/api/total/" + id, function(data) {
-            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
-            $("#data").append(purchaseDiv);
-        })
+        //     $.post("/api/recipe", recipeArray[r]).then(function(response) {
+        //         console.log(1);
+        //     })
+        // }
+        // $.get("/api/total/" + id, function(data) {
+        //     purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
+        //     $("#data").append(purchaseDiv);
+        // })
 
 
     });
     $(".storage").on("click", ".remove", function(event) {
+        event.preventDefault();
         var cost = $("#recipe" + this.id).attr("cost");
-        recipeArray.splice(this.id, 1);
+        var name = $("#name" + this.id).attr("title")
         total -= cost;
         totalDiv.html("Your total is " + total + " dollars");
-        event.preventDefault();
-        console.log(this.id);
+        for (var i = 0; i < recipeArray.length; i++) {
+            if (name === recipeArray[i].name) {
+                recipeArray.splice(i, 1)
+            }
+        }
+
+        console.log(recipeArray);
         $("#recipe" + this.id).remove();
     });
     $(".modal").on("hidden.bs.modal", function() {
