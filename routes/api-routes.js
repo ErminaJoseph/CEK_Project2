@@ -130,20 +130,27 @@ module.exports = function(app) {
     });
 
     app.post("/api/recipe", function(req, res) {
-        console.log(req.body.url);
+        // console.log(req.body.name);
+        const names = Object.values(req.body);
+        console.log(names[1]);
         db.User.findAll({
             where: { id: req.body.UserId },
             include: [db.Recipe]
         }).then(function(response) {
-            res.json(response);
-            console.log(response[0].dataValues.Recipes[0].url);
-            for (var i = 0; i < response.length; i++) {
-                if (req.body.url === response[0].dataValues.Recipes[i].url) {
-                    db.Recipe.create(req.body).then(function(recipe) {
-                        res.json(recipe);
-                    });
+            if (response[0].Recipes.length === 0) {
+                db.Recipe.create(req.body).then(function(recipe) {
+                    res.json(recipe);
+                });
+            } else {
+                for (var i = 0; i < response.length; i++) {
+                    if (names[1] !== response[0].dataValues.Recipes[i].name) {
+                        db.Recipe.create(req.body).then(function(recipe) {
+                            res.json(recipe);
+                        });
+                    }
                 }
             }
+            res.json(response);
         })
 
 

@@ -158,16 +158,16 @@ $(document).ready(function() {
         var purchaseDiv = $("<div>");
 
 
-        // for (var r = 0; r < recipeArray.length; r++) {
+        for (var r = 0; r < recipeArray.length; r++) {
 
-        //     $.post("/api/recipe", recipeArray[r]).then(function(response) {
-        //         console.log(1);
-        //     })
-        // }
-        // $.get("/api/total/" + id, function(data) {
-        //     purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
-        //     $("#data").append(purchaseDiv);
-        // })
+            $.post("/api/recipe", recipeArray[r]).then(function(response) {
+                console.log(1);
+            })
+        }
+        $.get("/api/total/" + id, function(data) {
+            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
+            $("#data").append(purchaseDiv);
+        })
 
 
     });
