@@ -165,7 +165,8 @@ $(document).ready(function() {
             })
         }
         $.get("/api/total/" + id, function(data) {
-            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
+            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email +
+                ". Check your profile page for a list of your purchases");
             $("#data").append(purchaseDiv);
         })
 

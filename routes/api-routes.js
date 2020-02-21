@@ -2,7 +2,6 @@ var db = require("../models");
 var passport = require("../config/passport");
 var bcrypt = require("bcryptjs");
 module.exports = function(app) {
-
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
         res.json(req.user);
     });
@@ -21,8 +20,6 @@ module.exports = function(app) {
                 zipCode: req.body.zipCode
             })
             .then(function(response) {
-
-                // res.end();
                 return res.json(response);
             })
             .catch(function(err) {
@@ -34,14 +31,9 @@ module.exports = function(app) {
     app.get("/api/total/:id", function(req, res) {
         // console.log(req.params.id);
         db.User.findAll({ where: { id: req.params.id } }).then(function(response) {
-
             return res.json(response);
-
         })
     });
-
-
-
     app.put("/api/update", function(req, res) {
         console.log('logging out body:', req.body)
 
@@ -126,39 +118,14 @@ module.exports = function(app) {
                 return res.json(response);
             })
         }
-
     });
 
     app.post("/api/recipe", function(req, res) {
-        // console.log(req.body.name);
-        const names = Object.values(req.body);
-        console.log(names[1]);
-        db.User.findAll({
-            where: { id: req.body.UserId },
-            include: [db.Recipe]
-        }).then(function(response) {
-            if (response[0].Recipes.length === 0) {
-                db.Recipe.create(req.body).then(function(recipe) {
-                    res.json(recipe);
-                });
-            } else {
-                for (var i = 0; i < response.length; i++) {
-                    if (names[1] !== response[0].dataValues.Recipes[i].name) {
-                        db.Recipe.create(req.body).then(function(recipe) {
-                            res.json(recipe);
-                        });
-                    }
-                }
-            }
-            res.json(response);
-        })
-
-
-
+        db.Recipe.create(req.body).then(function(recipe) {
+            res.json(recipe);
+        });
     });
-
     app.get("/api/recipes/:id", function(req, res) {
-
         var id = req.params.id;
         db.User.findAll({
             where: { id: id },

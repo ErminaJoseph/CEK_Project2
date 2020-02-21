@@ -28,6 +28,7 @@ $(document).ready(function() {
             $.post("/api/login/", loginCredentials, function(data) {
                 console.log(data.id);
                 localStorage.setItem("id", data.id);
+                $(location).attr('href', '/profile.html')
             })
         }
 
