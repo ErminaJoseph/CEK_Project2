@@ -81,6 +81,7 @@ $(document).ready(function() {
                 var removeButton = $("<button>");
                 removeButton.addClass("remove");
                 removeButton.text("Remove This Recipe");
+                removeButton.attr("id", i);
                 if (response.hits[i].recipe.ingredientLines.length <= 5) {
                     total += 20;
                     cost.text("Cost of this recipe 20 dollars");
@@ -103,6 +104,10 @@ $(document).ready(function() {
                 miniDiv.attr("id", "miniDiv");
                 healthList.html("<b> Health Benefits: </b>");
                 title.text(response.hits[i].recipe.label);
+                title.attr({
+                    id: "name" + i,
+                    title: response.hits[i].recipe.label
+                });
                 url.html("Link to the Recipe <br> <br>");
                 url.attr({
                     href: response.hits[i].recipe.url,
@@ -112,7 +117,7 @@ $(document).ready(function() {
                 miniDiv.append(url);
                 listDiv.append(healthList, ingredientList);
                 recipe.addClass("recipe");
-                recipe.attr("id", i);
+                recipe.attr("id", "recipe" + i);
                 image.attr("src", response.hits[i].recipe.image);
                 recipe.prepend(title, image, miniDiv, listDiv, removeButton);
                 if (response.hits[i].recipe.dietLabels[i] !== undefined) {
@@ -155,23 +160,31 @@ $(document).ready(function() {
         for (var r = 0; r < recipeArray.length; r++) {
 
             $.post("/api/recipe", recipeArray[r]).then(function(response) {
-                console.log(response);
+                console.log(1);
             })
         }
         $.get("/api/total/" + id, function(data) {
-            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email);
+            purchaseDiv.text("Thanks " + data[0].firstName + " " + data[0].lastName + " for your purchase your total is " + total + " dollars. We will email you a confermation number at " + data[0].email +
+                ". Check your profile page for a list of your purchases");
             $("#data").append(purchaseDiv);
         })
 
 
     });
-    $(".storage").on("click", ".recipe", ".remove", function(event) {
-        var cost = $(this).attr("cost");
-        recipeArray.splice(this.id, 1);
+    $(".storage").on("click", ".remove", function(event) {
+        event.preventDefault();
+        var cost = $("#recipe" + this.id).attr("cost");
+        var name = $("#name" + this.id).attr("title")
         total -= cost;
         totalDiv.html("Your total is " + total + " dollars");
-        event.preventDefault();
-        $(this).remove();
+        for (var i = 0; i < recipeArray.length; i++) {
+            if (name === recipeArray[i].name) {
+                recipeArray.splice(i, 1)
+            }
+        }
+
+        console.log(recipeArray);
+        $("#recipe" + this.id).remove();
     });
     $(".modal").on("hidden.bs.modal", function() {
         $(".modal-content").empty();

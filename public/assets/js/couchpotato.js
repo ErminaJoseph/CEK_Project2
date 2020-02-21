@@ -28,27 +28,15 @@ $(document).ready(function() {
             $.post("/api/login/", loginCredentials, function(data) {
                 console.log(data.id);
                 localStorage.setItem("id", data.id);
+                $(location).attr('href', '/profile.html')
             })
         }
 
     });
-    // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    // function loginUser(email, password, ) {
-    //     $.post("/api/login", {
-    //             email: email,
-    //             password: password
-    //         })
-    //         .done(function() {
-    //             window.location.replace("/members");
-    //             // If there's an error, log the error
-    //         })
-    //         .fail(function(err) {
-    //             console.log(err);
-    //         });
-    // }
-    // console.log(loginCredentials);
+
     $("#submit-new-user").on("click", function(event) {
         event.preventDefault();
+        localStorage.clear();
         var newUser = {
             newEmail: $("#inputEmailNew").val().trim(),
             newPassword: $("#inputPasswordNew").val().trim(),
@@ -60,19 +48,11 @@ $(document).ready(function() {
             state: $("#inputState").val().trim(),
             zipCode: $("#inputZip").val().trim()
         };
-        // console.log(newUser)
-        // if (!newUser.newEmail || !newUser.newPassword || !newUser.firstName || !newUser.lastName || !newUser.address || !newUser.addressTwo || !newUser.city || !newUser.state || !newUser.zipCode) {
-        //     return;
-        // }
-        // console.log('logging out new user;', newUser);
-        // If we have an email and password, run the signUpUser function
+
         signUpUser(newUser.newEmail, newUser.newPassword, newUser.firstName, newUser.lastName, newUser.address, newUser.addressTwo, newUser.city, newUser.state, newUser.zipCode);
-        // emailInput.val("");
-        // passwordInput.val("");
-        // Does a post to the signup route. If successful, we are redirected to the members page
-        // Otherwise we log any errors
+
         function signUpUser(email, password, firstName, lastName, address, addressTwo, city, state, zipCode) {
-            // console.log("test");
+
             $.post("/api/signup", {
                     email: email,
                     password: password,
